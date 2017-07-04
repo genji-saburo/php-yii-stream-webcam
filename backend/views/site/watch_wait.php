@@ -124,8 +124,8 @@ $alertJs = <<<SCRIPT
      }
    }
    //   Move check to the WS
-   checkAlerts();
-   setInterval(checkAlerts, 2000);
+//   checkAlerts();
+//   setInterval(checkAlerts, 2000);
         
    //   Add real time alert notification
    var subscribeWaitWath = function(){
