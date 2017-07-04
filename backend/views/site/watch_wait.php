@@ -74,7 +74,11 @@ $alertJs = <<<SCRIPT
                 '      <div class="modal-header">' +
                 '        <h4 class="modal-title">Camera alert notification</h4>' +
                 '      </div>' +
-                '      <div class="modal-body">We\'ve got video to show you. Accept if you are ready to watch it.</div>' +
+                '      <div class="modal-body">' +
+                '           <video id="test_video" controls autoplay style="width: 100%">' +
+                '               <source src="rtsp://127.0.0.1:8554/test" type="application/x-rtsp">' +
+                '           </video>' +
+                '      </div>' +
                 '      <div class="modal-footer">' +
                 '        <button type="button" onclick="acceptAlert(' + data.alert_id + ')" class="btn btn-primary" data-dismiss="modal">Accept</button>' +
                 '        <button type="button" onclick="skipAlert(' + data.alert_id + ')" class="btn btn-link" data-dismiss="modal">Skip</button>' +
@@ -82,12 +86,20 @@ $alertJs = <<<SCRIPT
                 '    </div>' +
                 '  </div>' +
                 '</div>';
-                $(popupTemplate).modal().on('hidden.bs.modal',function(e){
+                $(popupTemplate).modal().on('shown.bs.modal', function (e) {
+                    let p = new WSPlayer('test_video', {
+                        modules: [
+                            {
+                                client: RTSPClient,
+                                transport: wsTransport
+                            }
+                        ]
+                    });
+                }).on('hidden.bs.modal',function(e){
                     if(alertAssigned && !alertAccepted)
                         showLayout("activation-info");
                     else
                         showLayout("wait-info");
-                    
                 });
            }
         else{
@@ -112,8 +124,8 @@ $alertJs = <<<SCRIPT
      }
    }
    //   Move check to the WS
-   //checkAlerts();     
-   //setInterval(checkAlerts, 2000); 
+   checkAlerts();
+   setInterval(checkAlerts, 2000);
         
    //   Add real time alert notification
    var subscribeWaitWath = function(){
@@ -137,7 +149,11 @@ $alertJs = <<<SCRIPT
                             '      <div class="modal-header">' +
                             '        <h4 class="modal-title">Camera alert notification</h4>' +
                             '      </div>' +
-                            '      <div class="modal-body">We\'ve got video to show you. Accept if you are ready to watch it.</div>' +
+                            '      <div class="modal-body">' +
+                            '           <video id="test_video" controls autoplay style="width: 100%">' +
+                            '               <source src="rtsp://admin:DanielPass5@166.255.152.193:8888/cam/realmonitor?channel=1&subtype=1" type="application/x-rtsp">' +
+                            '           </video>' +
+                            '      </div>' +
                             '      <div class="modal-footer">' +
                             '        <button type="button" onclick="acceptAlert(' + data.alert_id + ')" class="btn btn-primary" data-dismiss="modal">Accept</button>' +
                             '        <button type="button" onclick="skipAlert(' + data.alert_id + ')" class="btn btn-link" data-dismiss="modal">Skip</button>' +
@@ -145,12 +161,21 @@ $alertJs = <<<SCRIPT
                             '    </div>' +
                             '  </div>' +
                             '</div>';
-                        $(popupTemplate).modal().on('hidden.bs.modal',function(e){
-                        if(alertAssigned && !alertAccepted)
-                            showLayout("activation-info");
-                        else
-                            showLayout("wait-info");
-                    });
+                        $(popupTemplate).modal().on('shown.bs.modal', function (e) {
+                            let p = new WSPlayer('test_video', {
+                                modules: [
+                                    {
+                                        client: RTSPClient,
+                                        transport: wsTransport
+                                    }
+                                ]
+                            });
+                        }).on('hidden.bs.modal',function(e){
+                            if(alertAssigned && !alertAccepted)
+                                showLayout("activation-info");
+                            else
+                                showLayout("wait-info");
+                        });
                 }
                 else{
                     var currentLocation = window.location.href;
@@ -221,6 +246,7 @@ $alertJs = <<<SCRIPT
         });
    });     
 SCRIPT;
+$this->registerJsFile('/js/streamedian.js');
 
 if ($curUser->role === \common\models\User::ROLE_AGENT) {
     //  Check only if agent doesn't have active alerts 

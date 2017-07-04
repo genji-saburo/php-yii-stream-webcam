@@ -1,0 +1,23 @@
+{
+  "name": "patroleum",
+  "version": "1.0.0",
+  "description": "Patroleum watches your home, business or enterprise live.",
+  "main": "index.js",
+  "dependencies": {
+    "streamedian": "git://github.com/Streamedian/html5_rtsp_player.git"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/patroleum/Patroleum-dev.git"
+  },
+  "author": "Sasha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/patroleum/Patroleum-dev/issues"
+  },
+  "homepage": "https://gitlab.com/patroleum/Patroleum-dev#README"
+}

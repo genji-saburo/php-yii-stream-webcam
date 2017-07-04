@@ -10497,3 +10497,4 @@ vendor/symfony/finder/Tests/Fixtures/r+e.gex[c]a(r)s/dir/bar.dat
 
 vendor
 .idea
+node_modules
