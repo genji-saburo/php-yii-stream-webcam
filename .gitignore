@@ -10494,3 +10494,6 @@ vendor/yiisoft/yii2/widgets/Pjax.php
 vendor/yiisoft/yii2/widgets/PjaxAsset.php
 vendor/yiisoft/yii2/widgets/Spaceless.php
 vendor/symfony/finder/Tests/Fixtures/r+e.gex[c]a(r)s/dir/bar.dat
+
+vendor
+.idea
