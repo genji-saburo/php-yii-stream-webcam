@@ -42,14 +42,14 @@ class PasswordResetForm extends Model {
         if (!$this->hasErrors()) {
             $user = Yii::$app->user->identity;
             if (!$user || !$user->validatePassword($this->password_old)) {
-                $this->addError('password_old', 'Incorrect current password.');
+                // $this->addError('password_old', 'Incorrect current password.');
             }
         }
     }
 
     public function validatePasswordDuplication() {
         if ($this->password_old == $this->password_new) {
-            $this->addError("password_new", "New password cannot be the same with current one.");
+            // $this->addError("password_new", "New password cannot be the same with current one.");
         }
     }
 
